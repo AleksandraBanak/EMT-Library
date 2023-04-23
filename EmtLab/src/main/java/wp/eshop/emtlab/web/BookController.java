@@ -4,11 +4,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import wp.eshop.emtlab.model.Book;
 import wp.eshop.emtlab.model.dto.BookDto;
+import wp.eshop.emtlab.model.enumerations.BookCategory;
 import wp.eshop.emtlab.service.BookService;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/books")
 public class BookController {
     private final BookService bookService;
@@ -47,7 +50,7 @@ public class BookController {
             return ResponseEntity.ok().build();
         return ResponseEntity.badRequest().build();
     }
-    @PostMapping("/reserve/{id}")
+    @GetMapping("/reserve/{id}")
     public ResponseEntity<Book> reserveBooks(@PathVariable Long id, @RequestParam Integer numReserved) {
         return this.bookService.reserveBooks(id, numReserved)
                 .map(book -> ResponseEntity.ok().body(book))
@@ -58,5 +61,9 @@ public class BookController {
         return this.bookService.returnBooks(id, numReturned)
                 .map(book -> ResponseEntity.ok().body(book))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
+    }
+    @GetMapping("/categories")
+    public List<BookCategory> listAllCategories() {
+        return Arrays.stream(BookCategory.values()).toList();
     }
 }
