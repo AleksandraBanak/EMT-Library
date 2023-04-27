@@ -22,7 +22,7 @@ const BookEdit = (props) => {
     const onFormSubmit = (e) => {
         e.preventDefault();
         const name = formData.name !== "" ? formData.name : props.book.name;
-        const category = formData.category !== "THRILLER" ? formData.category : props.book.category;
+        const category = formData.category !== "THRILLER" ? formData.category : props.book.bookCategory;
         const author = formData.author !== 0 ? formData.author : props.book.author.id;
         const availableCopies = formData.availableCopies !== 0 ? formData.availableCopies : props.book.availableCopies;
 
@@ -61,10 +61,10 @@ const BookEdit = (props) => {
                         <label>Category</label>
                         <select name="category" className="form-control" onChange={handleChange}>
                             {props.categories.map((element) =>{
-                                    if(props.book.category !== undefined &&
-                                    props.book.category === element)
+                                    if(props.book.bookCategory !== undefined &&
+                                    props.book.bookCategory === element)
                                         return (<option selected={element}
-                                                       value={props.book.category}>{element}</option>);
+                                                       value={props.book.bookCategory}>{element}</option>);
                                     else
                                         return (<option value={element}>{element}</option>);
                             })}
@@ -73,13 +73,13 @@ const BookEdit = (props) => {
                     <div className="form-group">
                         <label>Author</label>
                         <select name="author" className="form-control" onChange={handleChange}>
-                            {props.authors.map((element) =>{
+                            {props.authors.map((term) =>{
                                 if(props.book.author !== undefined &&
-                                    props.book.author.id === element.id)
+                                    props.book.author.id === term.id)
                                     return (<option selected={props.book.author.id}
-                                                   value={element.id}>{element.name + ' ' + element.surname}</option>);
+                                                   value={term.id}>{term.name + ' ' + term.surname}</option>);
                                 else
-                                    return (<option value={element.id}>{element.name + ' ' + element.surname}</option>);
+                                    return (<option value={term.id}>{term.name + ' ' + term.surname}</option>);
                             })}
                         </select>
                     </div>

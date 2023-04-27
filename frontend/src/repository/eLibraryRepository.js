@@ -31,10 +31,10 @@ const ELibraryService = {
             "availableCopies" : availableCopies,
         });
     },
-    editBook: (id, name, category, author, availableCopies) => {
+    editBook: (id, name, bookCategory, author, availableCopies) => {
         return axios.put(`/books/edit/${id}`, {
             "name": name,
-            "category": category,
+            "category": bookCategory,
             "authorId": author,
             "availableCopies": availableCopies
         });

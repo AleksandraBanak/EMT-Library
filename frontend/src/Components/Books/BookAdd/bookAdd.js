@@ -7,7 +7,7 @@ const BookAdd = (props) => {
 
     const [formData, updateFormData] = React.useState({
         name: "",
-        category: "THRILLER",
+        category: "NOVEL",
         author: 1,
         availableCopies: 0,
     })
@@ -69,7 +69,7 @@ const BookAdd = (props) => {
                         <label>Author</label>
                         <select name="author" className="form-control" onChange={handleChange}>
                             {props.authors.map((element) =>
-                                <option value={element.id}>{element.name}</option>
+                                <option value={element.id}>{element.name} {element.surname}</option>
                             )}
                         </select>
                     </div>
